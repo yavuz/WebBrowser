@@ -9,32 +9,32 @@
 import UIKit
 
 public protocol WebBrowserDelegate: class {
-    func webBrowser(webBrowser: WebBrowserViewController, didStartLoadingURL URL: NSURL?)
-    func webBrowser(webBrowser: WebBrowserViewController, didFinishLoadingURL URL: NSURL?)
-    func webBrowser(webBrowser: WebBrowserViewController, didFailToLoadURL URL: NSURL?, error: NSError)
+    func webBrowser(_ webBrowser: WebBrowserViewController, didStartLoadingURL URL: URL?)
+    func webBrowser(_ webBrowser: WebBrowserViewController, didFinishLoadingURL URL: URL?)
+    func webBrowser(_ webBrowser: WebBrowserViewController, didFailToLoadURL URL: URL?, error: NSError)
 
-    func webBrowserWillDismiss(webBrowser: WebBrowserViewController)
-    func webBrowserDidDismiss(webBrowser: WebBrowserViewController)
+    func webBrowserWillDismiss(_ webBrowser: WebBrowserViewController)
+    func webBrowserDidDismiss(_ webBrowser: WebBrowserViewController)
 }
 
 public extension WebBrowserDelegate {
-    func webBrowser(webBrowser: WebBrowserViewController, didStartLoadingURL URL: NSURL?) {
+    func webBrowser(_ webBrowser: WebBrowserViewController, didStartLoadingURL URL: Foundation.URL?) {
 
     }
 
-    func webBrowser(webBrowser: WebBrowserViewController, didFinishLoadingURL URL: NSURL?) {
+    func webBrowser(_ webBrowser: WebBrowserViewController, didFinishLoadingURL URL: Foundation.URL?) {
 
     }
 
-    func webBrowser(webBrowser: WebBrowserViewController, didFailToLoadURL URL: NSURL?, error: NSError) {
+    func webBrowser(_ webBrowser: WebBrowserViewController, didFailToLoadURL URL: Foundation.URL?, error: NSError) {
 
     }
 
-    func webBrowserWillDismiss(webBrowser: WebBrowserViewController) {
+    func webBrowserWillDismiss(_ webBrowser: WebBrowserViewController) {
 
     }
 
-    func webBrowserDidDismiss(webBrowser: WebBrowserViewController) {
+    func webBrowserDidDismiss(_ webBrowser: WebBrowserViewController) {
 
     }
 }

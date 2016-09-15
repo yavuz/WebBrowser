@@ -10,7 +10,7 @@ import UIKit
 
 internal struct NavigationBarAppearance {
     var hidden = false
-    var tintColor = UIColor.blueColor()
+    var tintColor = UIColor.blue
     var barTintColor: UIColor?
     var translucent = true
     var shadowImage: UIImage?
@@ -22,18 +22,18 @@ internal struct NavigationBarAppearance {
     init(navigationBar: UINavigationBar) {
         tintColor = navigationBar.tintColor
         barTintColor = navigationBar.barTintColor
-        translucent = navigationBar.translucent
+        translucent = navigationBar.isTranslucent
         shadowImage = navigationBar.shadowImage
-        backgroundImageForBarMetricsDefault = navigationBar.backgroundImageForBarMetrics(.Default)
-        backgroundImageForBarMetricsCompact = navigationBar.backgroundImageForBarMetrics(.Compact)
+        backgroundImageForBarMetricsDefault = navigationBar.backgroundImage(for: .default)
+        backgroundImageForBarMetricsCompact = navigationBar.backgroundImage(for: .compact)
     }
 
-    func applyToNavigationBar(navigationBar: UINavigationBar) {
+    func applyToNavigationBar(_ navigationBar: UINavigationBar) {
         navigationBar.tintColor = tintColor
         navigationBar.barTintColor = barTintColor
-        navigationBar.translucent = translucent
+        navigationBar.isTranslucent = translucent
         navigationBar.shadowImage = shadowImage
-        navigationBar.setBackgroundImage(backgroundImageForBarMetricsDefault, forBarMetrics: .Default)
-        navigationBar.setBackgroundImage(backgroundImageForBarMetricsCompact, forBarMetrics: .Compact)
+        navigationBar.setBackgroundImage(backgroundImageForBarMetricsDefault, for: .default)
+        navigationBar.setBackgroundImage(backgroundImageForBarMetricsCompact, for: .compact)
     }
 }

@@ -8,41 +8,41 @@
 
 import UIKit
 
-public class SafariActivity: UIActivity {
-    public var URL: NSURL?
+open class SafariActivity: UIActivity {
+    open var URL: Foundation.URL?
 
-    public override func activityType() -> String? {
-        return NSStringFromClass(self.dynamicType)
+    open override var activityType : UIActivityType? {
+        return UIActivityType(rawValue: NSStringFromClass(type(of: self)))
     }
 
-    public override func activityTitle() -> String? {
+    open override var activityTitle : String? {
         return LocalizedString(key: "Open in Safari")
     }
 
-    public override func activityImage() -> UIImage? {
+    open override var activityImage : UIImage? {
         return WebBrowser.image(named: "safariIcon")
     }
 
-    public override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+    open override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         for activityItem in activityItems {
-            if let activityURL = activityItem as? NSURL {
-                return UIApplication.sharedApplication().canOpenURL(activityURL)
+            if let activityURL = activityItem as? Foundation.URL {
+                return UIApplication.shared.canOpenURL(activityURL)
             }
         }
         return false
     }
 
-    public override func prepareWithActivityItems(activityItems: [AnyObject]) {
+    open override func prepare(withActivityItems activityItems: [Any]) {
         for activityItem in activityItems {
-            if let activityURL = activityItem as? NSURL {
+            if let activityURL = activityItem as? Foundation.URL {
                 URL = activityURL
             }
         }
     }
 
-    public override func performActivity() {
+    open override func perform() {
         if let URL = URL {
-            let completed = UIApplication.sharedApplication().openURL(URL)
+            let completed = UIApplication.shared.openURL(URL)
             activityDidFinish(completed)
         }
     }

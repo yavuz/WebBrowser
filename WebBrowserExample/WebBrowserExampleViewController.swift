@@ -40,7 +40,7 @@ class WebBrowserExampleViewController: UITableViewController {
     }
 
     // MARK: - Helper
-    private func setupUI() {
+    fileprivate func setupUI() {
         navigationItem.title = "WebBrowser Example"
         tableView.tableFooterView = UIView()
         tableView.tintColor = kTBBlueColor
@@ -51,33 +51,33 @@ class WebBrowserExampleViewController: UITableViewController {
     }
 
     // MARK: - Table view data source and delegate
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return URLStrings.count
     }
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(kWebBrowserExampleCellID)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: kWebBrowserExampleCellID)
         if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: kWebBrowserExampleCellID)
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: kWebBrowserExampleCellID)
         }
-        cell?.textLabel?.text = websiteTitles[indexPath.row]
+        cell?.textLabel?.text = websiteTitles[(indexPath as NSIndexPath).row]
         cell?.textLabel?.textColor = UIColor(white: 38 / 255, alpha: 1)
-        cell?.detailTextLabel?.text = URLStrings[indexPath.row]
+        cell?.detailTextLabel?.text = URLStrings[(indexPath as NSIndexPath).row]
         cell?.detailTextLabel?.textColor = kTBBlueColor
         return cell!
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if let URL = NSURL(string: URLStrings[indexPath.row]) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let URL = URL(string: URLStrings[(indexPath as NSIndexPath).row]) {
             let webBrowserViewController = WebBrowserViewController()
             webBrowserViewController.delegate = self
 
@@ -89,7 +89,7 @@ class WebBrowserExampleViewController: UITableViewController {
 //            webBrowserViewController.showURLInNavigationBarWhenLoading = false
 //            webBrowserViewController.showsPageTitleInNavigationBar = false
 
-            webBrowserViewController.language = .SimplifiedChinese
+            webBrowserViewController.language = .simplifiedChinese
             webBrowserViewController.tintColor = kTBBlueColor
             webBrowserViewController.loadURL(URL)
 
@@ -101,23 +101,23 @@ class WebBrowserExampleViewController: UITableViewController {
 }
 
 extension WebBrowserExampleViewController: WebBrowserDelegate {
-    func webBrowser(webBrowser: WebBrowserViewController, didStartLoadingURL URL: NSURL?) {
+    func webBrowser(_ webBrowser: WebBrowserViewController, didStartLoadingURL URL: Foundation.URL?) {
         print("Start loading...")
     }
 
-    func webBrowser(webBrowser: WebBrowserViewController, didFinishLoadingURL URL: NSURL?) {
+    func webBrowser(_ webBrowser: WebBrowserViewController, didFinishLoadingURL URL: Foundation.URL?) {
         print("Finish loading!")
     }
 
-    func webBrowser(webBrowser: WebBrowserViewController, didFailToLoadURL URL: NSURL?, error: NSError) {
+    func webBrowser(_ webBrowser: WebBrowserViewController, didFailToLoadURL URL: Foundation.URL?, error: NSError) {
         print("Failed to load! \n error: \(error)")
     }
 
-    func webBrowserWillDismiss(webBrowser: WebBrowserViewController) {
+    func webBrowserWillDismiss(_ webBrowser: WebBrowserViewController) {
 
     }
 
-    func webBrowserDidDismiss(webBrowser: WebBrowserViewController) {
+    func webBrowserDidDismiss(_ webBrowser: WebBrowserViewController) {
 
     }
 }
